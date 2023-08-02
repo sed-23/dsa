@@ -9,22 +9,28 @@ class SinglyLinkedList:
 
     def __init__(self, head):
         self.head = head
+        self.length = 1
+
 
     def append(self, val):
         node = Node(val)
         self.get_tail().next = node
-
+        self.length += 1
         
+
     def get_tail(self):
         node = self.head
         while node.next:
             node = node.next
         return node
 
+
     def add_at_head(self, val):
         node = Node(val)
         node.next = self.head
         self.head = node
+        self.length += 1
+
 
     def add_at_end(self, val):
         node = Node(val)
@@ -34,6 +40,7 @@ class SinglyLinkedList:
             temp_node = temp_node.next
         else:
             temp_node.next = node
+            self.length += 1
 
 
     def insert_after(self, ref_val, val):
@@ -49,8 +56,10 @@ class SinglyLinkedList:
         if ref_node:
             node.next = temp_node.next
             temp_node.next = node
+            self.length += 1
         else:
             self.print_list("The node you are looking for doesn't exist please select a node in the following existing nodes")
+
 
     def insert_before(self, ref_val, val):
         node = Node(val)
@@ -67,23 +76,19 @@ class SinglyLinkedList:
             if temp_node.data == ref_val:
                 node.next = temp_node
                 previous_node.next = node
+                self.length += 1
+                invalid_node = False
             previous_node = temp_node
             if previous_node.next:
                 temp_node = previous_node.next
+            
             else:
                 break
 
         
         if invalid_node:
             self.print_list("The node you are looking for doesn't exist please select a node in the following existing nodes")
-             
 
-        temp_node = previous_node
-
-        def prepend(node0, node1, node2):
-            if node0:
-                node2.next = node0.next
-                node0.next = node2
 
     def print_list(self, custom_message=None):
         list_val = f'{self.head.data}'
@@ -94,7 +99,7 @@ class SinglyLinkedList:
         if custom_message:
             print(f'{custom_message} -- {list_val}')
         else:
-            print(f'Linked List is - {list_val}')
+            print(f'Linked List is - {list_val} with length - {self.length}')
 
 # Creating nodes
 
@@ -107,35 +112,32 @@ node1 = Node('a')
 
 # Linking Nodes
 linked_list = SinglyLinkedList(node1)
-# node1.next = node2
-# node2.next = node3
-# node3.next = node4
-# node4.next = node5
-# node5.next = node6
 
 
 # Printing linked_list
-# linked_list.print_list()
-
-
-linked_list.append('b')
-linked_list.append('c')
-linked_list.append('d')
-linked_list.append('e')
-linked_list.append('f')
-linked_list.append('g')
-
 linked_list.print_list()
+
+
+# linked_list.append('b')
+# linked_list.append('c')
+# linked_list.append('d')
+# linked_list.append('e')
+# linked_list.append('f')
+# linked_list.append('g')
+
+# linked_list.print_list()
 
 
 # Inserting after a certain node
 # linked_list.insert_after('a', 7)
 # linked_list.print_list()
+# linked_list.insert_after('z', 4)
 
 
 # Inserting before a certain node
 # linked_list.insert_before('d', 2)
 # linked_list.print_list()
+# linked_list.insert_before('x', 3)
 
 
 # Add at head
@@ -143,5 +145,5 @@ linked_list.print_list()
 # linked_list.print_list()
 
 # Add at end
-linked_list.add_at_end('A')
-linked_list.print_list()
+# linked_list.add_at_end('A')
+# linked_list.print_list()
